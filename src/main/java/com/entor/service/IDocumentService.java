@@ -1,6 +1,6 @@
 package com.entor.service;
 
-import com.entor.entity.User;
+import com.entor.entity.Document;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -11,7 +11,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @author 
  * @since 2019-10-14
  */
-public interface IUserService extends IService<User> {
+public interface IDocumentService extends IService<Document> {
 	
-	public User login(String name,String password);
 }

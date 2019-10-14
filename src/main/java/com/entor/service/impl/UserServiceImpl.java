@@ -14,19 +14,20 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author 
- * @since 2019-10-12
+ * @since 2019-10-14
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-	
+
 	@Autowired
 	private UserMapper userMapper;
 	
 	@Override
-	public User login(String username, String password) {
+	public User login(String name, String password) {
 		User user = new User();
-		user.setUsername(username);
+		user.setName(name);
 		user.setPassword(password);
 		return userMapper.selectOne(user);
 	}
+	
 }

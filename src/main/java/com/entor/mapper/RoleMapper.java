@@ -1,6 +1,6 @@
 package com.entor.mapper;
 
-import com.entor.entity.User;
+import com.entor.entity.Role;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,6 +15,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2019-10-14
  */
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
+public interface RoleMapper extends BaseMapper<Role> {
 
 }

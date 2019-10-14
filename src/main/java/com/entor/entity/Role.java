@@ -15,21 +15,24 @@ import java.io.Serializable;
  * @author 
  * @since 2019-10-14
  */
-public class User extends Model<User> {
+public class Role extends Model<Role> {
 
     private static final long serialVersionUID = 1L;
 
 	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;
 	private String name;
-	private String password;
+    /**
+     * 流量额度M
+     */
+	private String line;
 
 
 	public Integer getId() {
 		return id;
 	}
 
-	public User setId(Integer id) {
+	public Role setId(Integer id) {
 		this.id = id;
 		return this;
 	}
@@ -38,17 +41,17 @@ public class User extends Model<User> {
 		return name;
 	}
 
-	public User setName(String name) {
+	public Role setName(String name) {
 		this.name = name;
 		return this;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getLine() {
+		return line;
 	}
 
-	public User setPassword(String password) {
-		this.password = password;
+	public Role setLine(String line) {
+		this.line = line;
 		return this;
 	}
 
@@ -56,7 +59,7 @@ public class User extends Model<User> {
 
 	public static final String NAME = "name";
 
-	public static final String PASSWORD = "password";
+	public static final String LINE = "line";
 
 	@Override
 	protected Serializable pkVal() {
@@ -65,10 +68,10 @@ public class User extends Model<User> {
 
 	@Override
 	public String toString() {
-		return "User{" +
+		return "Role{" +
 			", id=" + id +
 			", name=" + name +
-			", password=" + password +
+			", line=" + line +
 			"}";
 	}
 }
