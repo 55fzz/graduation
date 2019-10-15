@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author 
- * @since 2019-10-14
+ * @since 2019-10-15
  */
 public class Classification extends Model<Classification> {
 
@@ -22,7 +22,6 @@ public class Classification extends Model<Classification> {
 	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;
 	private String name;
-	private Integer did;
 
 
 	public Integer getId() {
@@ -43,20 +42,9 @@ public class Classification extends Model<Classification> {
 		return this;
 	}
 
-	public Integer getDid() {
-		return did;
-	}
-
-	public Classification setDid(Integer did) {
-		this.did = did;
-		return this;
-	}
-
 	public static final String ID = "id";
 
 	public static final String NAME = "name";
-
-	public static final String DID = "did";
 
 	@Override
 	protected Serializable pkVal() {
@@ -68,7 +56,6 @@ public class Classification extends Model<Classification> {
 		return "Classification{" +
 			", id=" + id +
 			", name=" + name +
-			", did=" + did +
 			"}";
 	}
 }

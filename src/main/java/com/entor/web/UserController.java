@@ -4,6 +4,9 @@ package com.entor.web;
 import java.io.File;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -15,7 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.entor.entity.User;
+import com.entor.mapper.UserMapper;
+import com.entor.service.IClassificationService;
+import com.entor.service.IDocumentService;
+import com.entor.service.IRoleService;
+import com.entor.service.IUserRoleServate;
 import com.entor.service.IUserService;
 
 /**
@@ -32,6 +42,17 @@ public class UserController {
 	
 	@Autowired
 	private IUserService userService;
+	@Autowired
+	private IRoleService roleService;
+	@Autowired
+	private IDocumentService  documentService;
+	@Autowired
+	private IClassificationService classificationService;
+	@Autowired
+	private IUserRoleServate userRoleServate;
+	
+	
+	
 	
 	@RequestMapping("/login")
 	public String login() {
@@ -45,7 +66,7 @@ public class UserController {
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(token);
-			return "redirect:/user/index";
+			return "redirect:/index";
 		}catch(Exception e) {
 			e.printStackTrace();
 			return "redirect:/user/login";
@@ -53,13 +74,7 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping("index")
-	public String index(Map<String, Object> map) {
-		Subject subject = SecurityUtils.getSubject();
-		String name = subject.getPrincipals().toString();
-		map.put("name", name);
-		return "index";
-	}
+	
 	
 	@RequestMapping("/logout")
 	public String logou() {
@@ -89,4 +104,8 @@ public class UserController {
 	public String addForm() {
 		return "addForm";
 	}
+	
+	
+	
+
 }
