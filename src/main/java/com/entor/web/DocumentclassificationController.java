@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2019-10-16
  */
 @RestController
-@RequestMapping("/classification")
-public class ClassificationController {
+@RequestMapping("/documentclassification")
+public class DocumentclassificationController {
 	
 }

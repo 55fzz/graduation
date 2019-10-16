@@ -15,36 +15,48 @@ import java.io.Serializable;
  * @author 
  * @since 2019-10-16
  */
-public class Classification extends Model<Classification> {
+public class Documentclassification extends Model<Documentclassification> {
 
     private static final long serialVersionUID = 1L;
 
 	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;
-	private String name;
+	private Integer did;
+	private Integer cid;
 
 
 	public Integer getId() {
 		return id;
 	}
 
-	public Classification setId(Integer id) {
+	public Documentclassification setId(Integer id) {
 		this.id = id;
 		return this;
 	}
 
-	public String getName() {
-		return name;
+	public Integer getDid() {
+		return did;
 	}
 
-	public Classification setName(String name) {
-		this.name = name;
+	public Documentclassification setDid(Integer did) {
+		this.did = did;
+		return this;
+	}
+
+	public Integer getCid() {
+		return cid;
+	}
+
+	public Documentclassification setCid(Integer cid) {
+		this.cid = cid;
 		return this;
 	}
 
 	public static final String ID = "id";
 
-	public static final String NAME = "name";
+	public static final String DID = "did";
+
+	public static final String CID = "cid";
 
 	@Override
 	protected Serializable pkVal() {
@@ -53,9 +65,10 @@ public class Classification extends Model<Classification> {
 
 	@Override
 	public String toString() {
-		return "Classification{" +
+		return "Documentclassification{" +
 			", id=" + id +
-			", name=" + name +
+			", did=" + did +
+			", cid=" + cid +
 			"}";
 	}
 }

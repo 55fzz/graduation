@@ -3,6 +3,7 @@ package com.entor.entity;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.enums.IdType;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.activerecord.Model;
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author 
- * @since 2019-10-14
+ * @since 2019-10-16
  */
 public class Document extends Model<Document> {
 
@@ -33,7 +34,16 @@ public class Document extends Model<Document> {
      * 保存地址
      */
 	private String address;
+    /**
+     * 大小
+     */
 	private String size;
+    /**
+     * 创建时间
+     */
+	private Date createDate;
+	private Integer cid;
+	private Integer uid;
 
 
 	public Integer getId() {
@@ -81,6 +91,33 @@ public class Document extends Model<Document> {
 		return this;
 	}
 
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public Document setCreateDate(Date createDate) {
+		this.createDate = createDate;
+		return this;
+	}
+
+	public Integer getCid() {
+		return cid;
+	}
+
+	public Document setCid(Integer cid) {
+		this.cid = cid;
+		return this;
+	}
+
+	public Integer getUid() {
+		return uid;
+	}
+
+	public Document setUid(Integer uid) {
+		this.uid = uid;
+		return this;
+	}
+
 	public static final String ID = "id";
 
 	public static final String TITLE = "title";
@@ -90,6 +127,12 @@ public class Document extends Model<Document> {
 	public static final String ADDRESS = "address";
 
 	public static final String SIZE = "size";
+
+	public static final String CREATEDATE = "createDate";
+
+	public static final String CID = "cid";
+
+	public static final String UID = "uid";
 
 	@Override
 	protected Serializable pkVal() {
@@ -104,6 +147,9 @@ public class Document extends Model<Document> {
 			", author=" + author +
 			", address=" + address +
 			", size=" + size +
+			", createDate=" + createDate +
+			", cid=" + cid +
+			", uid=" + uid +
 			"}";
 	}
 }

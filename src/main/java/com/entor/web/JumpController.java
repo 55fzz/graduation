@@ -1,6 +1,7 @@
 package com.entor.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.entor.entity.Document;
 import com.entor.entity.Role;
 import com.entor.entity.User;
 import com.entor.entity.UserRole;
@@ -36,7 +38,7 @@ public class JumpController {
 	private IUserRoleServate userRoleServate;
 	
 	
-	@RequestMapping("index")
+	@RequestMapping("/index")
 	public String index(Map<String, Object> map) {
 		Subject subject = SecurityUtils.getSubject();
 		String name = subject.getPrincipals().toString();
@@ -52,6 +54,7 @@ public class JumpController {
 		int line = Integer.parseInt(role.getLine());
 		map.put("cont",line/1024);
 		map.put("name", name);
+		map.put("use", 0);
 		return "index";
 	}
 	
@@ -72,6 +75,7 @@ public class JumpController {
 		int line = Integer.parseInt(role.getLine());
 		map.put("cont",line/1024);
 		map.put("name", name);
+		map.put("use", 0);
 		return "my";
 	}
 	
@@ -91,6 +95,7 @@ public class JumpController {
 		int line = Integer.parseInt(role.getLine());
 		map.put("cont",line/1024);
 		map.put("name", name);
+		map.put("use", 0);
 		return "zuijin";
 	}
 	
@@ -109,8 +114,14 @@ public class JumpController {
 		rwrapper.eq("id", userRole.getRid());
 		Role role = roleService.selectOne(rwrapper);
 		int line = Integer.parseInt(role.getLine());
+		Wrapper ewrapper = new EntityWrapper<Document>();
+		ewrapper.eq("uid", user.getId());
+		ewrapper.eq("cid", 2);
+		List<Document> ws = documentService.selectList(ewrapper);
+		map.put("ws", ws);
 		map.put("cont",line/1024);
 		map.put("name", name);
+		map.put("use", 0);
 		return "word";
 	}
 	
@@ -128,8 +139,14 @@ public class JumpController {
 		rwrapper.eq("id", userRole.getRid());
 		Role role = roleService.selectOne(rwrapper);
 		int line = Integer.parseInt(role.getLine());
+		Wrapper ewrapper = new EntityWrapper<Document>();
+		ewrapper.eq("uid", user.getId());
+		ewrapper.eq("cid", 3);
+		List<Document> es = documentService.selectList(ewrapper);
+		map.put("es", es);
 		map.put("cont",line/1024);
 		map.put("name", name);
+		map.put("use", 0);
 		return "excel";
 	}
 	
@@ -147,8 +164,34 @@ public class JumpController {
 		rwrapper.eq("id", userRole.getRid());
 		Role role = roleService.selectOne(rwrapper);
 		int line = Integer.parseInt(role.getLine());
+		Wrapper pwrapper = new EntityWrapper<Document>();
+		pwrapper.eq("uid", user.getId());
+		pwrapper.eq("cid", 1);
+		List<Document> ps = documentService.selectList(pwrapper);
+		map.put("ps", ps);
 		map.put("cont",line/1024);
 		map.put("name", name);
+		map.put("use", 0);
 		return "ppt";
+	}
+	
+	@RequestMapping("/addDocument")
+	public String addDocument(Map<String, Object> map) {
+		Subject subject = SecurityUtils.getSubject();
+		String name = subject.getPrincipals().toString();
+		Wrapper wrapper = new EntityWrapper<User>();
+		wrapper.eq("name", name);
+		User user = (User) userService.selectOne(wrapper);
+		Wrapper urwrapper = new EntityWrapper<UserRole>();
+		urwrapper.eq("uid", user.getId());
+		UserRole userRole = userRoleServate.selectOne(urwrapper);
+		Wrapper rwrapper = new EntityWrapper<Role>();
+		rwrapper.eq("id", userRole.getRid());
+		Role role = roleService.selectOne(rwrapper);
+		int line = Integer.parseInt(role.getLine());
+		map.put("cont",line/1024);
+		map.put("name", name);
+		map.put("use", 0);
+		return "addDocument";
 	}
 }

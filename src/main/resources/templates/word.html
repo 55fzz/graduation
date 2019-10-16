@@ -31,12 +31,7 @@
 <!--菜单-->
 <div class="left-menu">
     <div class="left-menu-top">
-        <a href="javascript:void(0)">
-            <div class="left-menu-top-small">
-                <img src="images/index_01.png"/>
-            </div>
-        </a>
-        <a href="javascript:void(0)">
+        <a href="addDocument.html">
             <div class="left-menu-top-small">
                 <img src="images/index_02.png"/>
             </div>
@@ -102,7 +97,13 @@
                 <div class="z allSelect">全选</div>
             </div>
             <div class="content cl">
-                
+                <div class="template cl" data-click="no" th:each="w: ${ws}">
+                    <img src="images/select.png" class="z templateState" alt=""/>
+                    <img src="images/icon3.png" class="z iconImg" alt=""/>
+                    <p class="z name" th:text="${w.title}"></p>
+                    <p class="y time" th:text="${w.createDate}"></p>
+                    <p class="y size" th:text="${w.size}/1024+'k'"></p>
+                </div>
             </div>
 
             <div id="pageGro" class="cb">

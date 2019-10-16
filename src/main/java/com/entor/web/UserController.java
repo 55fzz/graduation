@@ -94,7 +94,6 @@ public class UserController {
 		File file=new File("src\\main\\resources\\document\\"+name);
 		if(!file.exists()){//如果文件夹不存在
 			file.mkdir();//创建文件夹
-			System.out.println("2315642311654651");
 		}
 		return "redirect:/user/login";
 	}
