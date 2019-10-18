@@ -80,7 +80,7 @@ public class UserController {
 	public String logou() {
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();
-		return "redirect:/user/login";
+		return "login";
 	}
 	
 	@RequestMapping("/add")

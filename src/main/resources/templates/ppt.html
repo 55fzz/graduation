@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/my.css}" href="css/my.css" type="text/css" media="screen"/>
     <link rel="stylesheet" th:href="@{/css/base.css}" href="page/base.css" type="text/css" media="screen"/>
     <link rel="stylesheet" th:href="@{/css/pageGroup.css}" href="page/pageGroup.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/3.3.6/bootstrap.css}" href="css/bootstrap/3.3.6/bootstrap.css" />
 </head>
 <!--顶部-->
 <div class="nav">
@@ -23,6 +24,9 @@
         </div>
         <div class="userNumber y">
             你好,<span th:text="${name}"></span>
+        <a href="user/logout">
+        	<button type="button" class="btn btn-info">注销登录</button>
+        </a>   
         </div>
     </div>
 
@@ -107,19 +111,9 @@
                 </div>
                 
             </div>
-
+			<br/>
+			
             <div id="pageGro" class="cb">
-                <div class="pageUp">上一页</div>
-                <div class="pageList">
-                    <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                    </ul>
-                </div>
-                <div class="pageDown">下一页</div>
             </div>
         </div>
     </div>
@@ -188,6 +182,3 @@
 </body>
 </html>
 
-<!--此段可直接删除-开始-->
-<script type="text/javascript" src="http://www.sucainiu.com/themes/jsApi/demoAd/01.js" charset="UTF-8"></script>
-<!--此段可直接删除-结束-->

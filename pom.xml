@@ -29,11 +29,14 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		
+		<!-- 分页查询工具类 -->
 		<dependency>
 		    <groupId>com.github.pagehelper</groupId>
 		    <artifactId>pagehelper</artifactId>
 		    <version>5.0.3</version>
 		</dependency>
+		
+		
 		
 		<!-- 集成mybatis -->
 		<dependency>
@@ -93,6 +96,13 @@
 		    <version>1.12.1</version>
 		</dependency>
     	
+    	
+    	<!-- 下载工具包 -->
+    	<dependency>
+		      <groupId>commons-io</groupId>
+		      <artifactId>commons-io</artifactId>
+		      <version>2.4</version>
+    	</dependency>
 	</dependencies>
 
 	<build>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/my.css}" href="css/my.css" type="text/css" media="screen"/>
     <link rel="stylesheet" th:href="@{/css/base.css}" href="page/base.css" type="text/css" media="screen"/>
     <link rel="stylesheet" th:href="@{/css/pageGroup.css}" href="page/pageGroup.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/3.3.6/bootstrap.css}" href="css/bootstrap/3.3.6/bootstrap.css" />
 </head>
 <!--顶部-->
 <div class="nav">
@@ -23,6 +24,9 @@
         </div>
         <div class="userNumber y">
             你好,<span th:text="${name}"></span>
+        <a href="user/logout">
+        	<button type="button" class="btn btn-info">注销登录</button>
+        </a>
         </div>
     </div>
 
@@ -56,7 +60,7 @@
             </div>
         </a>
         <a href="javascript:void(0)">
-            <div class="left-menu-two-small">
+            <div class="ppt.html">
                 <img th:src="@{/images/ppt01.png}" src="images/ppt01.png"/>
             </div>
         </a>
@@ -87,7 +91,7 @@
     <div class="content">
         <div id="page_content">
             <div class="zuijinTop cl">
-                <img th:src="@{/images/xiazai.png}" src="images/xiazai.png" class="xiazai z" alt="" />
+                <img th:src="@{/images/xiazai.png}" src="images/xiazai.png" class="xiazai" alt="" />
                 <img th:src="@{/images/chong.png}" src="images/chong.png" class="chong z" alt="" />
                 <img th:src="@{/images/shanchu.png}" src="images/shanchu.png" class="shanchu z" alt="" />
                 <div class="sousuo y">
@@ -101,7 +105,14 @@
                 <div class="z the">人事</div>
             </div>
             <div class="content cl" style="padding-left: 2%;height:500px;overflow-y:auto;pisition:relative;">
-                
+                <div class="box2 template" data-show="no" th:each="d: ${ds}">
+                    <img th:src="@{'/images/icon'+${d.cid}+'.png'}" src="images/icon.png" class="icon" alt="" />
+                    <div>
+                        <p th:text="${d.title}"></p>
+                        <input type="text" class="none" />
+                    </div>
+                    <img src="images/select.png" class="select" alt="" th:name="${d.id}" />
+                </div>
                 
             </div>
             <div style='width:90%;position:fixed;bottom:10px;margin:auto'>
@@ -167,6 +178,15 @@
             $(".select").attr("src","images/selectC.png");
         }
     });
+    
+    $(".xiazai").click(function(){
+    	var id ={'id' : $(".select[alt='yes']").attr("name")};
+    	$.ajax({
+    		  url: "/document/Download",
+    		  data:id,
+    		  cache: false,
+    		});
+    });
 
     bindMyClick();
 
@@ -177,12 +197,14 @@
                    $(this).removeClass(".box2C");
                    $(this).removeClass(".box2H");
                    $(this).find(".select").attr("src","images/select.png");
+                   $(this).find(".select").attr("alt"," ");
                    $(this).attr("data-show","no");
 //                   $(this).find(".select").hide();
                }else {
                    $(this).addClass(".box2C");
                    $(this).addClass(".box2H");
                    $(this).find(".select").attr("src","images/selectC.png");
+                   $(this).find(".select").attr("alt","yes");
                    $(this).attr("data-show","yes");
                    $(this).find(".select").show();
                }

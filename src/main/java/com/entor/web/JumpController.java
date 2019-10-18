@@ -73,6 +73,10 @@ public class JumpController {
 		rwrapper.eq("id", userRole.getRid());
 		Role role = roleService.selectOne(rwrapper);
 		int line = Integer.parseInt(role.getLine());
+		Wrapper dwrapper = new EntityWrapper<Document>();
+		dwrapper.eq("uid", user.getId());
+		List<Document> ds = documentService.selectList(dwrapper);
+		map.put("ds", ds);
 		map.put("cont",line/1024);
 		map.put("name", name);
 		map.put("use", 0);
@@ -116,7 +120,7 @@ public class JumpController {
 		int line = Integer.parseInt(role.getLine());
 		Wrapper ewrapper = new EntityWrapper<Document>();
 		ewrapper.eq("uid", user.getId());
-		ewrapper.eq("cid", 2);
+		ewrapper.eq("cid", 3);
 		List<Document> ws = documentService.selectList(ewrapper);
 		map.put("ws", ws);
 		map.put("cont",line/1024);
@@ -141,7 +145,7 @@ public class JumpController {
 		int line = Integer.parseInt(role.getLine());
 		Wrapper ewrapper = new EntityWrapper<Document>();
 		ewrapper.eq("uid", user.getId());
-		ewrapper.eq("cid", 3);
+		ewrapper.eq("cid", 1);
 		List<Document> es = documentService.selectList(ewrapper);
 		map.put("es", es);
 		map.put("cont",line/1024);
@@ -166,7 +170,7 @@ public class JumpController {
 		int line = Integer.parseInt(role.getLine());
 		Wrapper pwrapper = new EntityWrapper<Document>();
 		pwrapper.eq("uid", user.getId());
-		pwrapper.eq("cid", 1);
+		pwrapper.eq("cid", 2);
 		List<Document> ps = documentService.selectList(pwrapper);
 		map.put("ps", ps);
 		map.put("cont",line/1024);
