@@ -114,6 +114,7 @@
             </div>
 
             <div id="pageGro" class="cb">
+            <!-- 
                 <div class="pageUp">上一页</div>
                 <div class="pageList">
                     <ul>
@@ -125,6 +126,7 @@
                     </ul>
                 </div>
                 <div class="pageDown">下一页</div>
+                 -->
             </div>
         </div>
     </div>
@@ -188,6 +190,17 @@
     });
     $(".quxiao,.ok,.close").click(function(){
         $(".huanyuanBox").hide();
+    });
+    
+    $(".shanchu").click(function(){
+    	var id ={'id' : $(".select[alt='yes']").attr("name")};
+    	$.ajax({
+  		  url: "/document/deleteDocument",
+  		  data:id,
+  		  success :function(msg){
+  		     alert( msg );
+  		  }
+  		});
     });
 </script>
 </body>

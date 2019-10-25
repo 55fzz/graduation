@@ -9,9 +9,11 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
 import com.entor.entity.Document;
 import com.entor.entity.Role;
 import com.entor.entity.User;
@@ -21,6 +23,7 @@ import com.entor.service.IDocumentService;
 import com.entor.service.IRoleService;
 import com.entor.service.IUserRoleServate;
 import com.entor.service.IUserService;
+import com.github.pagehelper.PageInfo;
 
 
 @Controller
@@ -37,6 +40,8 @@ public class JumpController {
 	@Autowired
 	private IUserRoleServate userRoleServate;
 	
+	
+	private int pageSize = 5;
 	
 	@RequestMapping("/index")
 	public String index(Map<String, Object> map) {
@@ -60,7 +65,10 @@ public class JumpController {
 	
 	
 	@RequestMapping("/my")
-	public String my(Map<String, Object> map) {
+	public String my(Map<String, Object> map,Integer pageNum) {
+		if(pageNum == null || pageNum == 0) {
+			pageNum = 1;
+		}
 		Subject subject = SecurityUtils.getSubject();
 		String name = subject.getPrincipals().toString();
 		Wrapper wrapper = new EntityWrapper<User>();

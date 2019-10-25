@@ -178,6 +178,17 @@
     $(".quxiao,.ok,.close").click(function(){
         $(".huanyuanBox").hide();
     });
+    
+    $(".shanchu").click(function(){
+    	var id ={'id' : $(".select[alt='yes']").attr("name")};
+    	$.ajax({
+  		  url: "/document/deleteDocument",
+  		  data:id,
+  		  success :function(msg){
+  		     alert( msg );
+  		  }
+  		});
+    });
 </script>
 </body>
 </html>

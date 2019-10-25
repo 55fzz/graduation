@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
@@ -86,7 +87,7 @@ public class DocumentController {
 		String filePath = "src\\main\\resources\\document\\"+name; 
 		String fileName = file.getOriginalFilename();
 		String Tail = fileName.substring(fileName.lastIndexOf("."));
-		File dest = new File( new File("src\\main\\resources\\document\\"+name).getAbsolutePath()+"\\" + dname+"\\"+Tail);
+		File dest = new File( new File("src\\main\\resources\\document\\"+name).getAbsolutePath()+"\\" + dname+Tail);
 		try {
 			file.transferTo(dest);
 			Document document = new Document();
@@ -99,7 +100,7 @@ public class DocumentController {
 			}else {
 				document.setCid(1);
 			}
-			document.setAddress(filePath + dname+Tail);
+			document.setAddress(filePath +"\\"+ dname+Tail);
 			document.setUid(user.getId());
 			Date now = new Date();
 			document.setCreateDate(now);
@@ -120,6 +121,8 @@ public class DocumentController {
 
 	@RequestMapping(value="/Download",method=RequestMethod.GET)
 	public void Download(HttpServletResponse res,int  id) throws IOException{
+		Subject subject = SecurityUtils.getSubject();
+		String name = subject.getPrincipals().toString();
 		Document document = documentService.selectById(id);
 		String fileName = document.getAddress().substring(document.getAddress().lastIndexOf("\\")+1);
 		//		res.setHeader("content-type", "application/octet-stream");
@@ -136,11 +139,10 @@ public class DocumentController {
 		//		//res.setContentLengthLong(file.length());
 		//		inputStream.close();
 		//		fos.close();
-		String downloadFilePath = document.getAddress();//被下载的文件在服务器中的路径,
-		File file = new File(downloadFilePath);
+		String downloadFilePath = "src\\main\\resources\\document\\"+name;//被下载的文件在服务器中的路径,
+		res.setHeader("Content-type", "application-download");
+		File file = new File( new File(downloadFilePath).getAbsolutePath());
 		if (file.exists()) {
-			res.setContentType("application/force-download");// 设置强制下载不打开            
-			res.addHeader("Content-Disposition", "attachment;fileName=" + fileName);
 			byte[] buffer = new byte[1024];
 			FileInputStream fis = null;
 			BufferedInputStream bis = null;
@@ -153,6 +155,7 @@ public class DocumentController {
 					outputStream.write(buffer, 0, i);
 					i = bis.read(buffer);
 				}
+				System.out.println("下载成功");
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -168,5 +171,16 @@ public class DocumentController {
 				}
 			}
 		}
+	}
+	
+	
+	@RequestMapping("/deleteDocument")
+	public String delete(int id) {
+		Document document = documentService.selectById(id);
+		File file = new File(document.getAddress());
+		if(file.delete()) {
+			documentService.deleteById(id);
+		}
+		return "redirect:/index";
 	}
 }

@@ -24,7 +24,7 @@ public class User extends Model<User> {
 	private String name;
 	private String password;
 
-
+	
 	public Integer getId() {
 		return id;
 	}

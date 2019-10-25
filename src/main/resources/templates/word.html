@@ -104,13 +104,14 @@
                 <div class="template cl" data-click="no" th:each="w: ${ws}">
                     <img src="images/select.png" class="z templateState" alt=""/>
                     <img src="images/icon3.png" class="z iconImg" alt=""/>
-                    <p class="z name" th:text="${w.title}"></p>
+                    <p class="z name" th:text="${w.title }"></p>
                     <p class="y time" th:text="${w.createDate}"></p>
                     <p class="y size" th:text="${w.size}/1024+'k'"></p>
                 </div>
             </div>
 
             <div id="pageGro" class="cb">
+            <!-- 
                 <div class="pageUp">上一页</div>
                 <div class="pageList">
                     <ul>
@@ -122,6 +123,7 @@
                     </ul>
                 </div>
                 <div class="pageDown">下一页</div>
+            -->
             </div>
         </div>
     </div>
@@ -185,6 +187,16 @@
     });
     $(".quxiao,.ok,.close").click(function(){
         $(".huanyuanBox").hide();
+    });
+    $(".shanchu").click(function(){
+    	var id ={'id' : $(".select[alt='yes']").attr("name")};
+    	$.ajax({
+  		  url: "/document/deleteDocument",
+  		  data:id,
+  		  success :function(msg){
+  		     alert( msg );
+  		  }
+  		});
     });
 </script>
 </body>
